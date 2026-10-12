@@ -10,8 +10,10 @@
 - `src/main/java/dev/bekhilitt/platform/PrototypeArena.java` — встроенный сервер, площадка, NPC, геометрия, постановка, очистка.
 - `src/main/java/dev/bekhilitt/protocol/` — два payload намерений/состояния представления.
 - `src/client/java/dev/bekhilitt/BekhilittClient.java` — переназначаемый ввод.
+- `src/main/java/dev/bekhilitt/input/CombatInput.java` — тестируемые границы контекста и нажатий; `src/client/java/dev/bekhilitt/client/mixin/MinecraftInputMixin.java` — перехват ванильных эффектов только в дуэли.
 - `src/main/resources/fabric.mod.json`, `assets/bekhilitt/lang/` — метаданные и локализация.
 - `src/test/java/dev/bekhilitt/combat/DuelTest.java` — тесты правил.
+- `src/test/java/dev/bekhilitt/input/CombatInputTest.java` — регрессии ввода; [LINUX_TESTING](LINUX_TESTING.md) — переносимый тестовый профиль.
 - [COMBAT_PROTOTYPE](COMBAT_PROTOTYPE.md) — запуск, defaults, ограничения; [CHANGELOG](../CHANGELOG.md) — пользовательские итерации.
 - [ADR 006](decisions/006-combat-prototype.md) — границы реализации стенда.
 

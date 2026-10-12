@@ -14,6 +14,11 @@ class DuelTest {
         Duel d=new Duel(); ticks(d,30,true,true); d.act(Duel.Action.GUARD); ticks(d,10,true,true);
         assertEquals(Duel.Impact.HIT,d.impact()); assertEquals(1,d.pressure());
     }
+    @Test void explicitGuardReleaseIsImmediate() {
+        Duel d=new Duel(); ticks(d,38,true,true); d.act(Duel.Action.GUARD);
+        assertTrue(d.guarding()); d.releaseGuard(); assertFalse(d.guarding());
+        ticks(d,2,true,true); assertEquals(Duel.Impact.HIT,d.impact());
+    }
     @Test void guardBlocksOnlyWhenFacing() {
         for(boolean facing:new boolean[]{true,false}) {
             Duel d=new Duel(); ticks(d,38,true,true); d.act(Duel.Action.GUARD); ticks(d,2,true,facing);

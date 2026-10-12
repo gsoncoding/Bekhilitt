@@ -66,6 +66,7 @@ public final class Duel {
         }
     }
     public void abort() { if (phase != Phase.COMPLETE) phase = Phase.ABORTED; }
+    public void releaseGuard() { guardUntil = 0; }
     public Phase phase() { return phase; }
     public int tick() { return tick; }
     public int finishTick() { return finishTick; }

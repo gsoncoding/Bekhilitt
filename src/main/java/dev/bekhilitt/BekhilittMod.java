@@ -15,8 +15,8 @@ public final class BekhilittMod implements ModInitializer {
         net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry.playC2S().register(dev.bekhilitt.protocol.ControlPayload.TYPE, dev.bekhilitt.protocol.ControlPayload.CODEC);
         net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry.playS2C().register(dev.bekhilitt.protocol.ArenaStatePayload.TYPE, dev.bekhilitt.protocol.ArenaStatePayload.CODEC);
         net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking.registerGlobalReceiver(dev.bekhilitt.protocol.ControlPayload.TYPE, (payload, context) -> {
-            if (payload.action() >= 0 && payload.action() < 3)
-                arena.command(context.player().createCommandSourceStack(), new String[]{"attack", "guard", "dodge"}[payload.action()]);
+            if (payload.action() >= 0 && payload.action() < 4)
+                arena.command(context.player().createCommandSourceStack(), new String[]{"attack", "guard", "dodge", "release_guard"}[payload.action()]);
         });
         CommandRegistrationCallback.EVENT.register((dispatcher, access, environment) -> {
             var root = Commands.literal("bekhilitt");

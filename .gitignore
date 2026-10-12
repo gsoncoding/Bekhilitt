@@ -4,3 +4,4 @@ run/
 .tools/
 .DS_Store
 verification/*.log
+dist/

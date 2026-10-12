@@ -49,6 +49,7 @@ public final class PrototypeArena {
         }
         if (!isParticipant(player.getUUID())) return 0;
         if (action.equals("stop")) { close(server); return 1; }
+        if (action.equals("release_guard")) { session.duel.releaseGuard(); return 1; }
         Duel.Action intent = switch (action) {
             case "attack" -> Duel.Action.ATTACK; case "guard" -> Duel.Action.GUARD;
             default -> Duel.Action.DODGE;

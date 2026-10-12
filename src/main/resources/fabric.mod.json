@@ -2,5 +2,6 @@
  "schemaVersion":1,"id":"bekhilitt","version":"${version}","name":"Bekhilitt Combat Prototype",
  "description":"Isolated solo combat test. Enable only in a disposable development world.",
  "environment":"*","entrypoints":{"main":["dev.bekhilitt.BekhilittMod"],"client":["dev.bekhilitt.BekhilittClient"]},
+ "mixins":[{"config":"bekhilitt.client.mixins.json","environment":"client"}],
  "depends":{"fabricloader":">=0.19.5","minecraft":"1.21.11","java":">=21","fabric-api":"*"}
 }
