@@ -17,7 +17,7 @@
 | [ADR 002](decisions/002-state-and-scope.md) | Причины выбора единого состояния и малого среза |
 | [ADR 003](decisions/003-chronology-and-controls.md) | Утверждённое начало, хронология и направление управления |
 | [ADR 004](decisions/004-playable-character-boundary.md) | Разделение личности и управления, будущая привязка Player и NPC |
-| [ADR 005](decisions/005-first-playable-episode.md) | Утверждение первого учебного эпизода и отделение от канонического среза |
+| [ADR 005](decisions/005-first-playable-episode.md) | Утверждённый первый эпизод: поединок с Гриффитом, вступление и границы обучения |
 | [CHRONOLOGY](story/CHRONOLOGY.md) | Порядок событий и показа, эпизодные привязки и проверка канона |
 | [CAMPAIGN](story/CAMPAIGN.md) | Предлагаемая структура истории |
 | [CHARACTERS](story/CHARACTERS.md) | Художественные ориентиры персонажей |
