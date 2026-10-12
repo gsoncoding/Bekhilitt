@@ -26,18 +26,34 @@ class DuelTest {
         ticks(d,20,true,true); assertFalse(d.act(Duel.Action.DODGE)); ticks(d,1,true,true); assertTrue(d.act(Duel.Action.DODGE));
     }
     @Test void idleDuelIsBoundedAndCompletionIsTerminal() {
-        Duel d=new Duel(); ticks(d,Duel.MAX_TICKS,false,true); assertEquals(Duel.Phase.FINISH,d.phase());
+        Duel d=new Duel(); ticks(d,Duel.MAX_TICKS,false,true); assertEquals(Duel.Phase.WARNING,d.phase());
         for(var a:Duel.Action.values()) assertFalse(d.act(a));
-        ticks(d,Duel.FINISH_TICKS,false,true); assertEquals(Duel.Phase.COMPLETE,d.phase());
+        ticks(d,Duel.WARNING_TICKS-1,false,true); assertEquals(Duel.Phase.WARNING,d.phase());
+        ticks(d,1,false,true); assertEquals(Duel.Phase.FINISH,d.phase());
+        ticks(d,Duel.FINISH_TICKS,false,true); assertEquals(Duel.Phase.RESULT,d.phase());
+        ticks(d,Duel.RESULT_TICKS,false,true); assertEquals(Duel.Phase.COMPLETE,d.phase());
         int t=d.tick(); ticks(d,100,true,true); assertEquals(t,d.tick());
     }
-    @Test void sixHitsTriggerStagingWithoutPlayerDeath() {
-        Duel d=new Duel(); ticks(d,340,true,true); assertEquals(6,d.pressure()); assertEquals(Duel.Phase.FINISH,d.phase());
+    @Test void sixHitsDoNotCutOffPractice() {
+        Duel d=new Duel(); ticks(d,340,true,true); assertEquals(6,d.pressure()); assertEquals(Duel.Phase.FIGHT,d.phase());
     }
-    @Test void practicedActionsTriggerStaging() {
+    @Test void pressingKeysWithoutSuccessfulDefenseDoesNotFinish() {
         Duel d=new Duel(); d.act(Duel.Action.ATTACK); ticks(d,24,true,true);
         d.act(Duel.Action.GUARD); ticks(d,5,true,true); d.act(Duel.Action.DODGE); ticks(d,8,true,true);
-        d.act(Duel.Action.ATTACK); ticks(d,6,true,true); assertEquals(2,d.landed()); assertEquals(Duel.Phase.FINISH,d.phase());
+        d.act(Duel.Action.ATTACK); ticks(d,6,true,true); assertEquals(2,d.landed());
+        ticks(d,400,true,true); assertEquals(Duel.Phase.FIGHT,d.phase());
+    }
+    @Test void successfulPracticeWaitsAtLeastTwentySecondsThenWarns() {
+        Duel d=new Duel(); d.act(Duel.Action.ATTACK); ticks(d,38,true,true);
+        d.act(Duel.Action.GUARD); ticks(d,2,true,true); assertEquals(1,d.blocks());
+        ticks(d,57,true,true); d.act(Duel.Action.DODGE); ticks(d,3,true,true); assertEquals(1,d.dodges());
+        ticks(d,5,true,true); d.act(Duel.Action.ATTACK); ticks(d,6,true,true); assertEquals(2,d.landed());
+        ticks(d,Duel.MIN_TICKS-d.tick()-1,true,true); assertEquals(Duel.Phase.FIGHT,d.phase());
+        ticks(d,1,true,true); assertEquals(Duel.Phase.WARNING,d.phase());
+    }
+    @Test void dodgeOutOfRangeStillAcknowledgesEvadedCommittedAttack() {
+        Duel d=new Duel(); ticks(d,37,true,true); d.act(Duel.Action.DODGE); ticks(d,3,false,true);
+        assertEquals(Duel.Impact.EVADED,d.impact()); assertEquals(1,d.dodges());
     }
     @Test void abortDoesNotReportStoryCompletion() {
         Duel d=new Duel(); d.abort(); ticks(d,2000,true,true); assertEquals(Duel.Phase.ABORTED,d.phase()); assertFalse(d.act(Duel.Action.ATTACK));

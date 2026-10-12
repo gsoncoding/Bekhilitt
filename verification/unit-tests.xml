@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="dev.bekhilitt.combat.DuelTest" tests="9" skipped="0" failures="0" errors="0" timestamp="2026-10-12T18:34:53.385Z" hostname="MacBook-Air-Aleksey.local" time="0.011">
+<testsuite name="dev.bekhilitt.combat.DuelTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2026-10-12T18:48:53.793Z" hostname="MacBook-Air-Aleksey.local" time="0.018">
   <properties/>
-  <testcase name="guardExpiresWhenInputStops()" classname="dev.bekhilitt.combat.DuelTest" time="0.006"/>
-  <testcase name="abortDoesNotReportStoryCompletion()" classname="dev.bekhilitt.combat.DuelTest" time="0.0"/>
-  <testcase name="practicedActionsTriggerStaging()" classname="dev.bekhilitt.combat.DuelTest" time="0.0"/>
-  <testcase name="idleDuelIsBoundedAndCompletionIsTerminal()" classname="dev.bekhilitt.combat.DuelTest" time="0.0"/>
-  <testcase name="sixHitsTriggerStagingWithoutPlayerDeath()" classname="dev.bekhilitt.combat.DuelTest" time="0.0"/>
+  <testcase name="guardExpiresWhenInputStops()" classname="dev.bekhilitt.combat.DuelTest" time="0.01"/>
+  <testcase name="abortDoesNotReportStoryCompletion()" classname="dev.bekhilitt.combat.DuelTest" time="0.001"/>
+  <testcase name="pressingKeysWithoutSuccessfulDefenseDoesNotFinish()" classname="dev.bekhilitt.combat.DuelTest" time="0.0"/>
+  <testcase name="sixHitsDoNotCutOffPractice()" classname="dev.bekhilitt.combat.DuelTest" time="0.0"/>
+  <testcase name="successfulPracticeWaitsAtLeastTwentySecondsThenWarns()" classname="dev.bekhilitt.combat.DuelTest" time="0.0"/>
+  <testcase name="idleDuelIsBoundedAndCompletionIsTerminal()" classname="dev.bekhilitt.combat.DuelTest" time="0.001"/>
+  <testcase name="dodgeOutOfRangeStillAcknowledgesEvadedCommittedAttack()" classname="dev.bekhilitt.combat.DuelTest" time="0.0"/>
   <testcase name="guardBlocksOnlyWhenFacing()" classname="dev.bekhilitt.combat.DuelTest" time="0.0"/>
   <testcase name="dodgeWindowAndCooldown()" classname="dev.bekhilitt.combat.DuelTest" time="0.0"/>
-  <testcase name="attackRequiresWindupAndRejectsSpam()" classname="dev.bekhilitt.combat.DuelTest" time="0.0"/>
-  <testcase name="missDoesNotCount()" classname="dev.bekhilitt.combat.DuelTest" time="0.001"/>
+  <testcase name="attackRequiresWindupAndRejectsSpam()" classname="dev.bekhilitt.combat.DuelTest" time="0.001"/>
+  <testcase name="missDoesNotCount()" classname="dev.bekhilitt.combat.DuelTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

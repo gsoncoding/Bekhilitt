@@ -54,10 +54,11 @@ public final class PrototypeArena {
             default -> Duel.Action.DODGE;
         };
         if (!session.duel.act(intent)) return 0;
-        if (intent == Duel.Action.ATTACK) player.swing(net.minecraft.world.InteractionHand.MAIN_HAND);
+        if (intent == Duel.Action.ATTACK) player.swing(net.minecraft.world.InteractionHand.MAIN_HAND, true);
         if (intent == Duel.Action.DODGE) {
             Vec3 v = player.getLookAngle().multiply(1, 0, 1).normalize().scale(-0.85);
             player.setDeltaMovement(v.x, 0.12, v.z); player.hurtMarked = true;
+            player.sendSystemMessage(Component.literal("Уклонение назад: короткое окно ухода от удара."));
         }
         return 1;
     }
@@ -88,6 +89,7 @@ public final class PrototypeArena {
         move(player, level, START, 180, 0);
         player.sendSystemMessage(Component.literal("Гатс — временная модель игрока. ").append(controls())
             .append(Component.literal(". F5: вид от третьего лица. /bekhilitt stop — выход. Исход дуэли — сюжетное поражение.")));
+        player.sendSystemMessage(Component.literal("Проверьте 2 попадания, 1 успешный блок и 1 уклонение от замаха. Финал — после проверки, не раньше 20 секунд, либо через 60 секунд. Перед ним будет предупреждение."));
     }
     public void tick(MinecraftServer server) {
         if (session == null) return;
@@ -111,17 +113,30 @@ public final class PrototypeArena {
             }
             s.griffith.setYRot((float)(Math.toDegrees(Math.atan2(-delta.x, delta.z)) + 180));
             s.griffith.setRightArmPose(new net.minecraft.core.Rotations(s.duel.windup() ? -115 : -15, 0, 0));
-            if (s.duel.landed() > before) p.sendSystemMessage(Component.literal("Удар достиг цели."));
+            if (s.duel.landed() > before) {
+                p.sendSystemMessage(Component.literal("ПОПАДАНИЕ ГАТСА: " + s.duel.landed() + "/2."));
+                s.level.sendParticles(net.minecraft.core.particles.ParticleTypes.CRIT, s.griffith.getX(), 102, s.griffith.getZ(), 8, 0.2, 0.3, 0.2, 0.05);
+            }
             switch (s.duel.impact()) {
-                case HIT -> { p.hurtMarked = true; p.setDeltaMovement(delta.normalize().scale(-0.35)); }
-                case BLOCKED -> p.sendSystemMessage(Component.literal("Защита выдержала удар."));
-                case EVADED -> p.sendSystemMessage(Component.literal("Уклонение: удар прошёл мимо."));
+                case HIT -> {
+                    p.hurtMarked = true; p.setDeltaMovement(delta.normalize().scale(-0.35));
+                    p.sendSystemMessage(Component.literal("ПОПАДАНИЕ ГРИФФИТА. Держите защиту лицом к нему или уклоняйтесь перед контактом."));
+                }
+                case BLOCKED -> p.sendSystemMessage(Component.literal("БЛОК УСПЕШЕН: защита выдержала удар."));
+                case EVADED -> p.sendSystemMessage(Component.literal("УКЛОНЕНИЕ УСПЕШНО: удар прошёл мимо."));
                 default -> { }
             }
-            p.displayClientMessage(Component.literal("ГАТС | Удары: " + s.duel.landed() + " | Пропущено: " + s.duel.pressure()
-                + " | " + (s.duel.windup() ? "ГРИФФИТ: ЗАМАХ!" : s.duel.guarding() ? "ЗАЩИТА" : s.duel.dodging() ? "УКЛОНЕНИЕ" : "ГОТОВ")), true);
+            String own = s.duel.dodging() ? "УКЛОНЕНИЕ" : s.duel.guarding() ? "ЗАЩИТА" : s.duel.attacking() ? "ЗАМАХ" : "ГОТОВ";
+            p.displayClientMessage(Component.literal("ГАТС: " + own + " | ГРИФФИТ: " + (s.duel.windup() ? "ЗАМАХ!" : "ГОТОВ")), true);
+        } else if (s.duel.phase() == Duel.Phase.WARNING) {
+            if (previous != Duel.Phase.WARNING) {
+                sendState(p, 2);
+                p.sendSystemMessage(Component.literal(s.duel.finishReason() + ". Через 3 секунды начнётся постановочное поражение; управление временно приостановится."));
+                title(p, "ФИНАЛ ДУЭЛИ", "Постановка через 3 секунды", 60);
+            }
+            p.displayClientMessage(Component.literal("Постановка через " + ((60 - s.duel.phaseTick() + 19) / 20) + "…"), true);
         } else if (s.duel.phase() == Duel.Phase.FINISH) {
-            if (previous != Duel.Phase.FINISH) sendState(p, 2);
+            if (previous != Duel.Phase.FINISH) title(p, "ПЕРЕХВАТ", "Гриффит завершает дуэль", 65);
             // Technical staging, not a claim about the canonical finishing technique.
             move(p, s.level, START, 180, s.duel.finishTick() > 30 ? 55 : 0);
             p.setDeltaMovement(Vec3.ZERO);
@@ -129,6 +144,14 @@ public final class PrototypeArena {
             s.griffith.setPos(0.5, 101, z);
             s.griffith.setRightArmPose(new net.minecraft.core.Rotations(-90, 0, 0));
             p.displayClientMessage(Component.literal("Гриффит перехватывает инициативу… [техническая постановка]"), true);
+        } else if (s.duel.phase() == Duel.Phase.RESULT) {
+            if (previous != Duel.Phase.RESULT) {
+                title(p, "ПОРАЖЕНИЕ", "Гатс вступает в Отряд Сокола", 90);
+                p.sendSystemMessage(Component.literal("Боевой стенд завершён. Через 5 секунд — возврат к исходной позиции. Это технический тест, прогресс кампании не записывается."));
+            }
+            move(p, s.level, START, 180, 55);
+            p.setDeltaMovement(Vec3.ZERO);
+            p.displayClientMessage(Component.literal("Конец стенда. Возврат через " + ((100 - s.duel.phaseTick() + 19) / 20) + "…"), true);
         } else if (s.duel.phase() == Duel.Phase.COMPLETE) {
             p.sendSystemMessage(Component.literal("Канонический исход: поражение Гатса → вступление в Отряд Сокола. Конец боевого стенда; прогресс кампании не записывается."));
             close(server);
@@ -138,6 +161,11 @@ public final class PrototypeArena {
         return Component.keybind("key.bekhilitt.attack").append(" удар · ")
             .append(Component.keybind("key.bekhilitt.guard")).append(" защита · ")
             .append(Component.keybind("key.bekhilitt.dodge")).append(" уклонение");
+    }
+    private static void title(ServerPlayer p, String title, String subtitle, int duration) {
+        p.connection.send(new net.minecraft.network.protocol.game.ClientboundSetTitlesAnimationPacket(5, duration, 5));
+        p.connection.send(new net.minecraft.network.protocol.game.ClientboundSetSubtitleTextPacket(Component.literal(subtitle)));
+        p.connection.send(new net.minecraft.network.protocol.game.ClientboundSetTitleTextPacket(Component.literal(title)));
     }
     private static void sendState(ServerPlayer p, int state) {
         net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking.send(p, new dev.bekhilitt.protocol.ArenaStatePayload(state));
@@ -152,6 +180,7 @@ public final class PrototypeArena {
         ServerPlayer p = server.getPlayerList().getPlayer(old.owner);
         if (p != null) {
             sendState(p, 0);
+            p.connection.send(new net.minecraft.network.protocol.game.ClientboundClearTitlesPacket(true));
             p.setGameMode(old.mode);
             if (p.isAlive()) move(p, old.level, old.returnPos, old.yaw, old.pitch);
             p.displayClientMessage(Component.empty(), true);
