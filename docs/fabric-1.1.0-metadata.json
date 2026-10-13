@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "bekhilitt",
+  "version": "${version}",
+  "name": "Bekhilitt First Episode Prototype",
+  "description": "Isolated solo first episode with server-owned checkpoints. Disposable Bekhilitt-Test world only.",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "dev.bekhilitt.BekhilittMod"
+    ],
+    "client": [
+      "dev.bekhilitt.BekhilittClient"
+    ]
+  },
+  "mixins": [
+    {
+      "config": "bekhilitt.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
+}

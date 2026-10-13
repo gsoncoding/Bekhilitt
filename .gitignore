@@ -1,7 +1,14 @@
 .gradle/
+.gradle-home/
+.gradle-*/
 build/
 run/
-.tools/
+libs/
+workspace-tools/
+*.log
 .DS_Store
-verification/*.log
+.tools/
 dist/
+verification/*.log
+verification/gameplay-qa/
+logs/

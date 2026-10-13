@@ -1,2 +1,2 @@
-pluginManagement { repositories { maven { url = 'https://maven.fabricmc.net/' }; gradlePluginPortal() } }
-rootProject.name = 'bekhilitt'
+pluginManagement { repositories { gradlePluginPortal(); maven { url='https://maven.neoforged.net/releases' } } }
+rootProject.name = 'bekhilitt-epic'

@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "first_episode_1",
+  "id": "bekhilitt:golden_age/first_episode",
+  "adaptation": "paraphrase_only",
+  "phases": [
+    {
+      "id": "injury",
+      "durationTicks": 140,
+      "speaker": "story.bekhilitt.narrator",
+      "body": "story.bekhilitt.injury.body",
+      "objective": "story.bekhilitt.injury.objective",
+      "pages": []
+    },
+    {
+      "id": "transport",
+      "durationTicks": 100,
+      "speaker": "story.bekhilitt.narrator",
+      "body": "story.bekhilitt.transport.body",
+      "objective": "story.bekhilitt.transport.objective",
+      "pages": []
+    },
+    {
+      "id": "recovery",
+      "durationTicks": 120,
+      "speaker": "story.bekhilitt.casca",
+      "body": "story.bekhilitt.recovery.body",
+      "objective": "story.bekhilitt.recovery.objective",
+      "pages": []
+    },
+    {
+      "id": "awakening",
+      "durationTicks": 60,
+      "speaker": "story.bekhilitt.narrator",
+      "body": "story.bekhilitt.awakening.body",
+      "objective": "story.bekhilitt.awakening.objective",
+      "pages": []
+    },
+    {
+      "id": "casca_dialogue",
+      "durationTicks": 0,
+      "speaker": "story.bekhilitt.casca",
+      "body": "story.bekhilitt.casca.page1",
+      "objective": "story.bekhilitt.casca.objective",
+      "pages": [
+        "story.bekhilitt.casca.page1",
+        "story.bekhilitt.casca.page2",
+        "story.bekhilitt.casca.page3"
+      ]
+    },
+    {
+      "id": "griffith_dialogue",
+      "durationTicks": 0,
+      "speaker": "story.bekhilitt.griffith",
+      "body": "story.bekhilitt.griffith.page1",
+      "objective": "story.bekhilitt.griffith.objective",
+      "pages": [
+        "story.bekhilitt.griffith.page1",
+        "story.bekhilitt.griffith.page2"
+      ]
+    },
+    {
+      "id": "duel",
+      "durationTicks": 0,
+      "speaker": "story.bekhilitt.griffith",
+      "body": "story.bekhilitt.duel.body",
+      "objective": "story.bekhilitt.duel.objective",
+      "pages": []
+    },
+    {
+      "id": "end",
+      "durationTicks": 160,
+      "speaker": "story.bekhilitt.narrator",
+      "body": "story.bekhilitt.end.body",
+      "objective": "story.bekhilitt.end.objective",
+      "pages": []
+    }
+  ]
+}

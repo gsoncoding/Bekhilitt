@@ -1,13 +1,7 @@
-#!/bin/sh
+#!/usr/bin/env sh
 set -eu
 cd "$(dirname "$0")/.."
-# Prefer the isolated JDK downloaded for this workspace; otherwise use caller's JDK 21.
-if [ -d '../.tools/jdk-21.0.12.1+1/Contents/Home' ]; then
-  JAVA_HOME="$(cd '../.tools/jdk-21.0.12.1+1/Contents/Home' && pwd)"
-  export JAVA_HOME
-fi
-if [ -d '../.tools/gradle' ]; then
-  GRADLE_USER_HOME="$(cd '../.tools/gradle' && pwd)"
-  export GRADLE_USER_HOME
-fi
-exec ./gradlew "${@:-runClient}" --console=plain
+# Use an installed full JDK 21. This script does not install a launcher or modify
+# any global Java, Minecraft, key-binding, account, or server settings.
+if [ "$#" -eq 0 ]; then set -- runClient; fi
+exec ./gradlew "$@" --console=plain

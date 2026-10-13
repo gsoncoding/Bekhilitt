@@ -1,0 +1,41 @@
+{
+  "minecraft": "1.21.1",
+  "neoforge": "21.1.219",
+  "java": "21",
+  "profile_status": "EXPERIMENTAL_INTEGRATED_QA",
+  "mods": [
+    {
+      "id": "epicfight",
+      "version": "21.17.3.1",
+      "file": "epic-fight-21.17.3.1-mc1.21.1-neoforge.jar",
+      "official_page": "https://www.curseforge.com/minecraft/mc-mods/epic-fight-mod/files/8175609",
+      "sha256": "8b882554cf10086398340fbdc741819ee72a801a3adce516c7f4768326a39526",
+      "bytes": 8578288,
+      "side": "client_and_server",
+      "role": "required",
+      "bundled": false
+    },
+    {
+      "id": "terralith",
+      "version": "2.5.8",
+      "file": "Terralith_1.21.x_v2.5.8.jar",
+      "official_page": "https://modrinth.com/datapack/terralith/version/MuJMtPGQ",
+      "sha256": "00333a130ac38b7b9ca93700098d5e02e0612bdc2d3522aada2f36e5600621bf",
+      "bytes": 3115385,
+      "side": "server_worldgen",
+      "role": "experimental_profile",
+      "bundled": false
+    },
+    {
+      "id": "explorify",
+      "version": "1.6.5",
+      "file": "Explorify v1.6.5.mod.jar",
+      "official_page": "https://modrinth.com/datapack/explorify/version/CuBdAr31",
+      "sha256": "2dc76398b48b2aae9b4024642da098b0880125572de160cb5ecf91d102890cad",
+      "bytes": 767884,
+      "side": "server_worldgen",
+      "role": "experimental_profile",
+      "bundled": false
+    }
+  ]
+}

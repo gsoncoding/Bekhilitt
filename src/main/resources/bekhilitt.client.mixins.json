@@ -1,7 +1,0 @@
-{
-  "required": true,
-  "package": "dev.bekhilitt.client.mixin",
-  "compatibilityLevel": "JAVA_21",
-  "client": ["MinecraftInputMixin"],
-  "injectors": {"defaultRequire": 1}
-}
