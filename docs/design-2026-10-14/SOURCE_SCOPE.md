@@ -1,0 +1,52 @@
+# Материалы за пределами документационного пакета
+
+Следующие пути встречались в исходных документах локальной поставки. Они перечислены для ориентации, а не как существующие файлы этой GitHub-ветки или ссылки на доступные downloads. Локальные build/QA отчёты и исходники 1.3–1.5 не публикуются в этой работе. Перед реализацией нужный материал следует получить из соответствующего проверенного комплекта.
+
+- `AGENTS.md`
+- `CHANGELOG.md`
+- `docs/COMBAT_PACE_SLICE.md`
+- `docs/COMBAT_PROTOTYPE.md`
+- `docs/DEPENDENCIES_AND_LICENSES.md`
+- `docs/EPIC_FIGHT_SERVER_BOUNDARY.md`
+- `docs/FIRST_EPISODE.md`
+- `docs/FIRST_HAWKS_RAID.md`
+- `docs/GUTS_SHEATH_VISUAL.md`
+- `docs/INSTALL_CAMP.md`
+- `docs/INSTALL_CAMP_LIFE.md`
+- `docs/INSTALL_CAMP_SAFETY.md`
+- `docs/INSTALL_EPIC_PROFILE.md`
+- `docs/INSTALL_FIRST_HAWKS_RAID.md`
+- `docs/INSTALL_GAMEPLAY_SLICE.md`
+- `docs/LINUX_TESTING.md`
+- `docs/NATIVE_SKILL_PRACTICE.md`
+- `docs/PACKAGING_EPIC_RELEASE.md`
+- `docs/PROTOTYPE_PLAN.md`
+- `docs/QA_CAMP.md`
+- `docs/QA_CAMP_FIX.md`
+- `docs/QA_CAMP_LIFE.md`
+- `docs/QA_CAMP_SAFETY.md`
+- `docs/QA_EPIC_FIGHT.md`
+- `docs/QA_FIRST_EPISODE.md`
+- `docs/QA_FIRST_HAWKS_RAID.md`
+- `docs/QA_GAMEPLAY_SLICE.md`
+- `docs/RELEASE_CAMP_LIFE.md`
+- `docs/RELEASE_CAMP_SAFETY.md`
+- `docs/RELEASE_EPIC.md`
+- `docs/STORY_DATA.md`
+- `docs/WAR_CAMP_ENVIRONMENT.md`
+- `docs/decisions/001-stack.md`
+- `docs/decisions/002-state-and-scope.md`
+- `docs/decisions/003-chronology-and-controls.md`
+- `docs/decisions/005-first-playable-episode.md`
+- `docs/decisions/006-combat-prototype.md`
+- `docs/decisions/007-first-episode-checkpoints.md`
+- `docs/decisions/008-epic-fight-experimental.md`
+- `docs/decisions/009-native-practice-after-end.md`
+- `docs/decisions/010-compact-dialogue-free-camp.md`
+- `docs/decisions/011-first-hawks-raid.md`
+- `docs/decisions/012-post-raid-camp-life.md`
+- `docs/decisions/013-world-space-camp-slice.md`
+- `docs/story/BOSSES.md`
+- `docs/story/CHRONOLOGY.md`
+- `docs/story/SCENES.md`
+- `docs/story/SOURCES.md`
